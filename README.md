@@ -8,10 +8,16 @@ China Artificial Intelligence Competition · Language and Knowledge Technology C
 采用json2tsv.py实现比赛数据集到paddlehub数据集格式的转换 然后利用Google翻译的文档翻译功能对训练集进行了回译，并选出回译结果中所有标签为Depends的数据与原有的train.tsv放在一起生成train_aug.tsv
 
 其中for_trans.py用于生成提交到google翻译的docx文档，翻译成英文后，从网页上把结果保存下来去除空行成为train.raw， 然后使用raw2docx.py转换成docx再把此文档翻译回中文（这里分了两个part）,翻译结果拼接成train_trans.raw， 使用pair_gen.py恢复标签，最后用select_dep.py过滤出回译结果中标签为Depends的训练数据。（过于复杂，有一部分需要手工操作，处理好的文件在dataset目录下train_aug.tsv）
+# 环境
++ paddlepaddle 1.7.0
++ python 3
++ paddlehub 1.6.1
 # 安装依赖
 ```shell
 pip install mafan
 pip install paddlehub==1.6.1 --upgrade
+pip install docx
+pip install tqdm
 ```
 # 训练
 ```shell
